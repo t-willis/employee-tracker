@@ -16,12 +16,30 @@ prompt({
     name: 'query',
     message: 'select an option',
     choices: [
-        'view all departments'
+        'View All Departments',
+        'View All Roles',
+        'View All Employees'
     ]
 }).then((answers) => {
     console.log(answers.query);
-    if (answers.query === 'view all departments') {
+    if (answers.query === 'View All Departments') {
         db.query('SELECT * FROM departments', (err, results) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.table(results);
+            }
+        })
+    } else if (answers.query === 'View All Roles') {
+        db.query('SELECT * FROM roles', (err, results) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.table(results);
+            }
+        })
+    } else if (answers.query === 'View All Employees') {
+        db.query('SELECT * FROM employees', (err, results) => {
             if (err) {
                 console.log(err);
             } else {
