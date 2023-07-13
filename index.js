@@ -8,7 +8,7 @@ const db = mysql.createConnection({
     user: 'root',
     database: 'employee_db'
 },
-    console.log('connected to database')
+    console.log('--- connected to database ---')
 );
 
 prompt({
