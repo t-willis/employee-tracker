@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const mysql = require('mysql2');
 require('console.table');
 const prompt = inquirer.createPromptModule();
+const questions = require('./lib/questions');
 
 const db = mysql.createConnection({
     host: '127.0.0.1',
@@ -11,40 +12,26 @@ const db = mysql.createConnection({
     console.log('--- connected to database ---')
 );
 
-prompt({
-    type: 'rawlist',
-    name: 'query',
-    message: 'What would you like to do?',
-    choices: [
-        'View All Departments',
-        'View All Roles',
-        'View All Employees'
-    ]
-}).then((answers) => {
-    console.log(answers.query);
+const getAll = (query) => {
+    db.query('SELECT * FROM ??', query, (err, results) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.table(results);
+        }
+    });
+};
+
+prompt(questions).then((answers) => {
     if (answers.query === 'View All Departments') {
-        db.query('SELECT * FROM departments', (err, results) => {
-            if (err) {
-                console.log(err);
-            } else {
-                console.table(results);
-            }
-        })
+        getAll('departments');
     } else if (answers.query === 'View All Roles') {
-        db.query('SELECT * FROM roles', (err, results) => {
-            if (err) {
-                console.log(err);
-            } else {
-                console.table(results);
-            }
-        })
+        getAll('roles');
     } else if (answers.query === 'View All Employees') {
-        db.query('SELECT * FROM employees', (err, results) => {
-            if (err) {
-                console.log(err);
-            } else {
-                console.table(results);
-            }
-        })
+        getAll('employees')
     }
 })
+
+const init = () => {
+    prompt(questions);
+};
