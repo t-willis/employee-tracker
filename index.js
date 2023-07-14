@@ -4,13 +4,7 @@ require('console.table');
 const prompt = inquirer.createPromptModule();
 const questions = require('./lib/questions');
 
-const db = mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'root',
-    database: 'employee_db'
-},
-    console.log('--- connected to database ---')
-);
+let db;
 
 const getAll = (query) => {
     db.query('SELECT * FROM ??', query, (err, results) => {
@@ -22,16 +16,37 @@ const getAll = (query) => {
     });
 };
 
-prompt(questions).then((answers) => {
-    if (answers.query === 'View All Departments') {
-        getAll('departments');
-    } else if (answers.query === 'View All Roles') {
-        getAll('roles');
-    } else if (answers.query === 'View All Employees') {
-        getAll('employees')
+const handleAction = ({ action }) => {
+    console.log(`Action: ${action}`);
+    switch(action) {
+        case 'View All Departments': {
+            getAll('departments');
+            break;
+        }
+        case 'View All Roles': {
+            getAll('roles');
+            break;
+        }
+        case 'View All Employees': {
+            getAll('employees');
+            break;
+        }
     }
-})
+}
+
 
 const init = () => {
-    prompt(questions);
+    prompt(questions).then(handleAction);
 };
+
+
+
+init();
+
+
+
+db = mysql.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    database: 'employee_db'
+});
