@@ -14,7 +14,7 @@ const db = mysql.createConnection({
 prompt({
     type: 'rawlist',
     name: 'query',
-    message: 'select an option',
+    message: 'What would you like to do?',
     choices: [
         'View All Departments',
         'View All Roles',
