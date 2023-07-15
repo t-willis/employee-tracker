@@ -33,6 +33,9 @@ const handleAction = ({ action, deptName, newRoleName, newRoleSalary, newRoleDep
             addEmployee(newEmpFirstName, newEmpLastName, newEmpRole, newEmpManager);
             break;
         }
+        case 'Update an Employee': {
+            
+        }
         case '- Exit -': {
             process.exit();
         }
