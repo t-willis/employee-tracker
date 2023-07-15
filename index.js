@@ -26,7 +26,7 @@ const handleAction = ({ action, deptName, newRoleName, newRoleSalary, newRoleDep
             break;
         }
         case 'Add a New Role': {
-            addRole(newRoleName, newRoleSalary, newRoleDept)
+            addRole(newRoleName, newRoleSalary, newRoleDept);
             break;
         }
     }
