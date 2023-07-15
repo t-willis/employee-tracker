@@ -16,8 +16,22 @@ const getAll = (query) => {
     });
 };
 
-const handleAction = ({ action }) => {
-    console.log(`Action: ${action}`);
+const addDept = (input) => {
+    db.query('INSERT INTO departments (name) VALUES (?)', input, (err, results) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.table(results);
+            getAll('departments');
+        }
+    });
+};
+
+// const addRole = (input) => {
+//     db.query('INSERT INTO employees (title, salary) VALUES (?)')
+// }
+
+const handleAction = ({ action, deptName }) => {
     switch(action) {
         case 'View All Departments': {
             getAll('departments');
@@ -29,6 +43,10 @@ const handleAction = ({ action }) => {
         }
         case 'View All Employees': {
             getAll('employees');
+            break;
+        }
+        case 'Add A Department': {
+            addDept(deptName);
             break;
         }
     }
