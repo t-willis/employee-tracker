@@ -3,33 +3,9 @@ const mysql = require('mysql2');
 require('console.table');
 const prompt = inquirer.createPromptModule();
 const questions = require('./lib/questions');
+const { getAll, getAllRoles, addDept } = require('./lib/functions');
 
 let db;
-
-const getAll = (query) => {
-    db.query('SELECT * FROM ??', query, (err, results) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.table(results);
-        }
-    });
-};
-
-const addDept = (input) => {
-    db.query('INSERT INTO departments (name) VALUES (?)', input, (err, results) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.table(results);
-            getAll('departments');
-        }
-    });
-};
-
-// const addRole = (input) => {
-//     db.query('INSERT INTO employees (title, salary) VALUES (?)')
-// }
 
 const handleAction = ({ action, deptName }) => {
     switch(action) {
@@ -38,7 +14,7 @@ const handleAction = ({ action, deptName }) => {
             break;
         }
         case 'View All Roles': {
-            getAll('roles');
+            getAllRoles();
             break;
         }
         case 'View All Employees': {
