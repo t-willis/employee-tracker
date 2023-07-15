@@ -3,11 +3,11 @@ const mysql = require('mysql2');
 require('console.table');
 const prompt = inquirer.createPromptModule();
 const questions = require('./lib/questions');
-const { getAll, getAllRoles, addDept } = require('./lib/functions');
+const { getAll, getAllRoles, addDept, addRole } = require('./lib/functions');
 
 let db;
 
-const handleAction = ({ action, deptName }) => {
+const handleAction = ({ action, deptName, newRoleName, newRoleSalary, newRoleDept }) => {
     switch(action) {
         case 'View All Departments': {
             getAll('departments');
@@ -21,8 +21,12 @@ const handleAction = ({ action, deptName }) => {
             getAll('employees');
             break;
         }
-        case 'Add A Department': {
+        case 'Add a Department': {
             addDept(deptName);
+            break;
+        }
+        case 'Add a New Role': {
+            addRole(newRoleName, newRoleSalary, newRoleDept)
             break;
         }
     }
@@ -35,12 +39,8 @@ const init = () => {
 
 
 
-init();
-
-
-
 db = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
     database: 'employee_db'
-});
+}, init());
