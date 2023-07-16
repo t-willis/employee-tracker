@@ -3,11 +3,11 @@ const mysql = require('mysql2');
 require('console.table');
 const prompt = inquirer.createPromptModule();
 const questions = require('./lib/questions');
-const { getAll, getAllRoles, addDept, addRole, addEmployee } = require('./lib/functions');
+const { getAll, getAllRoles, addDept, addRole, addEmployee, updateEmployeeRole } = require('./lib/functions');
 
 let db;
 
-const handleAction = ({ action, deptName, newRoleName, newRoleSalary, newRoleDept, newEmpFirstName, newEmpLastName, newEmpRole, newEmpManager }) => {
+const handleAction = ({ action, deptName, newRoleName, newRoleSalary, newRoleDept, newEmpFirstName, newEmpLastName, newEmpRole, newEmpManager, updateEmpChoice, updateEmpRole }) => {
     switch(action) {
         case 'View All Departments': {
             getAll('departments');
@@ -33,8 +33,10 @@ const handleAction = ({ action, deptName, newRoleName, newRoleSalary, newRoleDep
             addEmployee(newEmpFirstName, newEmpLastName, newEmpRole, newEmpManager);
             break;
         }
-        case 'Update an Employee': {
-            
+        case 'Update an Employees Role': {
+            updateEmployeeRole(updateEmpRole, updateEmpChoice);
+            // console.log(`${updateEmpChoice} ${updateEmpRole}`);
+            break;
         }
         case '- Exit -': {
             process.exit();
