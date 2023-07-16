@@ -35,7 +35,6 @@ const handleAction = ({ action, deptName, newRoleName, newRoleSalary, newRoleDep
         }
         case 'Update an Employees Role': {
             updateEmployeeRole(updateEmpRole, updateEmpChoice);
-            // console.log(`${updateEmpChoice} ${updateEmpRole}`);
             break;
         }
         case '- Exit -': {
