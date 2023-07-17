@@ -72,7 +72,7 @@ const getAllRoles = () => {
 };
 
 const getAllEmployees = () => {
-    db.query('SELECT orig.first_name, orig.last_name, roles.title,  CASE WHEN orig.manager_id IS NULL THEN \'n/a\' ELSE CONCAT(MAN.first_name, \' \', MAN.last_name) END as manager FROM employees AS orig LEFT JOIN roles ON orig.role_id = roles.id LEFT JOIN employees AS MAN ON MAN.id = orig.manager_id', (err, results) => {
+    db.query('SELECT orig.first_name, orig.last_name, roles.title, CASE WHEN orig.manager_id IS NULL THEN \'n/a\' ELSE CONCAT(MAN.first_name, \' \', MAN.last_name) END as manager FROM employees AS orig LEFT JOIN roles ON orig.role_id = roles.id LEFT JOIN employees AS MAN ON MAN.id = orig.manager_id', (err, results) => {
         if (err) {
             console.log(err);
         } else {
