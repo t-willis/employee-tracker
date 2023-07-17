@@ -37,6 +37,7 @@ const handleAction = ({ action, deptName, newRoleName, newRoleSalary, newRoleDep
             break;
         }
         case '- Exit -': {
+            console.log(`Bye!`);
             process.exit();
         }
     }
@@ -120,7 +121,7 @@ const updateEmployeeRole = (role_id, id) => {
         if (err) {
             console.log(err);
         } else {
-            console.table(results);
+            console.log(`Updated role for employee id: ${id}!`);
             init();
         }
     });
@@ -131,4 +132,17 @@ db = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
     database: 'employee_db'
-}, init());
+}, console.log(`
+███████ ███    ███ ██████  ██       ██████  ██    ██ ███████ ███████ 
+██      ████  ████ ██   ██ ██      ██    ██  ██  ██  ██      ██      
+█████   ██ ████ ██ ██████  ██      ██    ██   ████   █████   █████   
+██      ██  ██  ██ ██      ██      ██    ██    ██    ██      ██      
+███████ ██      ██ ██      ███████  ██████     ██    ███████ ███████ 
+                                                                     
+                                                                     
+████████ ██████   █████   ██████ ██   ██ ███████ ██████              
+   ██    ██   ██ ██   ██ ██      ██  ██  ██      ██   ██             
+   ██    ██████  ███████ ██      █████   █████   ██████              
+   ██    ██   ██ ██   ██ ██      ██  ██  ██      ██   ██             
+   ██    ██   ██ ██   ██  ██████ ██   ██ ███████ ██   ██
+   `), init());

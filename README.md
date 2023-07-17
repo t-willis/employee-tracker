@@ -22,7 +22,7 @@ In addition to the above requirements you'll also need to create the database an
 ---
 ## Usage
 
-A short video demonstration can be found here: NOT YET IMPLEMENTED
+A short video demonstration can be found here: [Click Here](https://drive.google.com/file/d/12YTn5S9Goof8Kh4fzUq_eata04GW5jEW/view)
 
 Begin by invoking the program in the terminal by typing `node index.js`, the user will then be prompted to choose an item from the menu. Upon choosing your desired option you will be presented with either a table or additional input fields depending on which option was initially selected.
 
