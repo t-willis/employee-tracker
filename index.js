@@ -63,7 +63,7 @@ const getAllDepartments = () => {
 
 // displays table of all roles including title, salary and department
 const getAllRoles = () => {
-    db.query('SELECT title, salary, departments.name AS department FROM roles LEFT JOIN departments ON roles.department_id = departments.id', (err, results) => {
+    db.query('SELECT roles.id, title, salary, departments.name AS department FROM roles LEFT JOIN departments ON roles.department_id = departments.id', (err, results) => {
         if (err) {
             console.log(err);
         } else {
@@ -75,7 +75,7 @@ const getAllRoles = () => {
 
 // displays table of all employees including first name, last name, title, and manager replacing NULL with n/a
 const getAllEmployees = () => {
-    db.query('SELECT orig.first_name, orig.last_name, roles.title, CASE WHEN orig.manager_id IS NULL THEN \'n/a\' ELSE CONCAT(MAN.first_name, \' \', MAN.last_name) END as manager FROM employees AS orig LEFT JOIN roles ON orig.role_id = roles.id LEFT JOIN employees AS MAN ON MAN.id = orig.manager_id', (err, results) => {
+    db.query('SELECT orig.id, orig.first_name, orig.last_name, roles.title, roles.salary, CASE WHEN orig.manager_id IS NULL THEN \'n/a\' ELSE CONCAT(MAN.first_name, \' \', MAN.last_name) END as manager FROM employees AS orig LEFT JOIN roles ON orig.role_id = roles.id LEFT JOIN employees AS MAN ON MAN.id = orig.manager_id', (err, results) => {
         if (err) {
             console.log(err);
         } else {
